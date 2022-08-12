@@ -1,7 +1,7 @@
 # unistore-technicaldemo
 A technical demo on [Unistore](https://www.snowflake.com/workloads/unistore/) with an Python UI infront for better comparison. 
 
-Below is the comparison image of the UI outcome. (Please do not forget to watch the [video](https://vimeo.com/739044002/eaa6350080 ) to see the outcome which is less than 3 mins)
+Below is the comparison image of the UI outcome. (Please do not forget to watch the [video](https://vimeo.com/739044002/eaa6350080 ) to see the outcome which is less than 4 mins)
 
 
 
