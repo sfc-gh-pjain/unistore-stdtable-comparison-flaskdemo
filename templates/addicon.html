@@ -1,0 +1,59 @@
+<html>  
+ <head>  
+  <title>Python Flask Add Remove Input Fields Dynamically with jQuery and save to database MySQLdb</title>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<style>
+.input-wrapper div {
+    margin-bottom: 10px;
+}
+.remove-input {
+    margin-top: 10px;
+    margin-left: 15px;
+    vertical-align: text-bottom;
+}
+.add-input {
+    margin-top: 10px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+}
+</style>
+ </head>  
+ <body>  
+  <div style="width:85%;padding:50px;">  
+    <h2>Python Flask Add Remove Input Fields Dynamically with jQuery and save to database MySQLdb</h2>  
+    {% if message %}
+          <div class="alert alert-success">{{message}}</div>
+    {% endif %}
+    <form method="POST">
+        <div class="input-wrapper">
+            <div>Name : <br/>
+            <input type="text" name="field[]" value=""/>
+            <a class="add-input" title="Add input"><img src="/static/img/add.png"/></a>
+            </div>
+        </div>
+        <input type="submit" name="cmdsubmit">
+    </form>
+   
+  </div>  
+<script>
+$(document).ready(function(){
+    var max_input_fields = 10;
+    var add_input = $('.add-input');
+    var input_wrapper = $('.input-wrapper');
+    var new_input = '<div><input type="text" name="field[]" value=""/><a href="javascript:void(0);" class="remove-input" title="Remove input"><i class="fas fa-minus"></i></a></div>';
+    var add_input_count = 1; 
+    $(add_input).click(function(){
+        if(add_input_count < max_input_fields){
+            add_input_count++; 
+            $(input_wrapper).append(new_input); 
+        }
+    });
+    $(input_wrapper).on('click', '.remove-input', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove();
+        add_input_count--;
+    });
+});
+</script>
+ </body>  
+</html>

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}
+Snowflake Accelerator -- HybridTable
+{%  endblock %}
+{% block content %}
+    <section class="container">
+        <div id="col-1">
+            <h1>Snowflake Hybrid Table Testing</h1>
+            <form action="" method="post">
+                <p>
+                    <h2>Identify Price of Individual Order</h2>
+                    <label>
+                        Please enter the Order Number    :
+                        <input type = "text" name = "keyid" />
+                        <br>
+                        Please enter the Customer Number :
+                        <input type = "text" name = "custid" />
+                    </label>
+                </p>
+                <button class='btn btn-default'>Fetch</button>
+            </form>
+
+            <form action="" method="post">
+                <p>
+                <h2>Singleton Insert Testing </h2>
+                    Please type in number of rows to be inserted for this test:
+                    <input type = "text" name = "InsertOrders" />
+                </p>
+                <button class='btn btn-default'>InsertPlease</button>
+
+            </form>
+             <form action="" method="post">
+                <br>
+                <p>
+                    <h2>Analytical Query Testing </h2>
+                    <label>Please enter the Year of your choice	:
+                                <input list="year" name="year_list" id="year_list" /></label>
+                                <datalist id="year">
+                                        <option value="1992">
+                                        <option value="1993">
+                                        <option value="1994">
+                                        <option value="1995">
+                                        <option value="1996">
+                                        <option value="1997">
+                                        <option value="1998">
+                                </datalist>
+                </p>
+                <button class='btn btn-default'>Fetch</button>
+                {{ table | safe }}
+                <!-- <img src="/plot.png" alt="my plot"> -->
+            </form>
+        </div>
+        <div id="col-2">
+           <h1>Snowflake Normal Table Testing</h1>
+            <form action="" method="post">
+                <p>
+                    <h2>Identify Price of Individual Order</h2>
+                    <label>
+                        Please enter the Order Number     :
+                        <input type = "text" name = "keyidNormal" />
+                        <br>
+                        Please enter the Customer Number  :
+                        <input type = "text" name = "custidNormal" />
+                    </label>
+                </p>
+                <button class='btn btn-default'>Fetch</button>
+
+            </form>
+
+            <form action="" method="post">
+                <p>
+                <h2>Singleton Insert Testing </h2>
+                    Please type in number of rows to be inserted for this test:
+                    <input type = "text" name = "InsertSTDOrders" />
+                </p>
+                <button class='btn btn-default'>InsertPlease</button>
+
+            </form>
+            <form action="" method="post">
+                <br>
+                <p>
+                    <h2>Analytical Query Testing </h2>
+                    <label>Please enter the Year of your choice	:
+                                <input list="yearstd" name="year_liststd" id="year_liststd" /></label>
+                                <datalist id="yearstd">
+                                        <option value="1992">
+                                        <option value="1993">
+                                        <option value="1994">
+                                        <option value="1995">
+                                        <option value="1996">
+                                        <option value="1997">
+                                        <option value="1998">
+                                </datalist>
+                </p>
+                <button class='btn btn-default'>Fetch</button>
+                {{ tablestd | safe }}
+            </form>
+        </div>
+
+    </section>
+
+    {% endblock %}

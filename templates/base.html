@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+        <script src="../static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="shortcut icon" href="#">
+    </head>
+    <body>
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <a href="{{ url_for('index') }}"><img src="/static/png/snowflake.png"></a>
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('DataPoints') }}">DBTasks</a></li>
+						<li><a href="{{ url_for('add') }}">Estimator</a></li>
+                        <li><a href="{{ url_for('HybridTable') }}">HybridTableDemo</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+                {%  block content %}
+                {%  endblock %}
+
+                {% block sidebar %}
+                {% endblock %}
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+		 <div class="main wrapper clearfix">
+			<article class=flashes>
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+					{% for message in messages %}
+						<li> {{ message }} </li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+				{% endwith %}
+			</article>
+        </div> 
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery-1.11.0.min.js') }}"><\/script>')</script>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+		
+		 <!-- integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" -->
+			
+		<script>
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_input = $('.add-input');
+			var input_wrapper = $('.input-wrapper');
+			var new_input = '<div><input type="text" name="DB[]" value=""/><a href= "javascript;" class="remove-input" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_input).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapper).append(new_input); 
+				}
+			});
+			$(input_wrapper).on('click', '.remove-input', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});
+
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_inputschema = $('.add-inputschema');
+			var input_wrapperSch = $('.input-wrapperSch');
+			var new_inputSch = '<div><input type="text" name="schema[]" value=""/><a href= "javascript;" class="remove-inputschema" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_inputschema).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapperSch).append(new_inputSch); 
+				}
+			});
+			$(input_wrapperSch).on('click', '.remove-inputschema', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});	
+
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_inputrole = $('.add-inputrole');
+			var input_wrapperrole = $('.input-wrapperrole');
+			var new_inputrole = '<div><input type="text" name="role[]" value=""/><a href= "javascript;" class="remove-inputrole" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_inputrole).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapperrole).append(new_inputrole); 
+				}
+			});
+			$(input_wrapperrole).on('click', '.remove-inputrole', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});	
+		
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_inputaccgrant = $('.add-inputaccgrant');
+			var input_wrapperaccgrant = $('.input-wrapperaccgrant');
+			var new_inputaccgrant = '<div><small>Privilege :</small><select name="accprivilege[]" id="accprivilege"><option value="CREATE ROLE">CREATE_ROLE</option><option value="CREATE USER">CREATE_USER</option><option value="CREATE WAREHOUSE">CREATE_WAREHOUSE</option><option value="CREATE DATABASE">CREATE_DATABASE</option><option value="CREATE INTEGRATION">CREATE_INTEGRATION</option><option value="APPLY MASKING POLICY">APPLY_MASKING_POLICY</option><option value="EXECUTE TASK">EXECUTE_TASK</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<small>Role :</small><input type="text" name="accrole[]" value=""/><a href= "javascript;" class="remove-inputaccgrant" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_inputaccgrant).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapperaccgrant).append(new_inputaccgrant); 
+				}
+			});
+			$(input_wrapperaccgrant).on('click', '.remove-inputaccgrant', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});	
+		
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_inputdbgrant = $('.add-inputdbgrant');
+			var input_wrapperdbgrant = $('.input-wrapperdbgrant');
+			var new_inputdbgrant = '<div><small>Privilege :</small><select name="dbprivilege[]" id="dbprivilege"><option value="MODIFY">MODIFY</option><option value="MONITOR">MONITOR</option><option value="USAGE">USAGE</option><option value="CREATE SCHEMA">CREATE_SCHEMA</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<small>Role :</small><input type="text" name="dbrole[]" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;<small>Database :</small> <input type="text" name="db[]" value=""/><a href= "javascript;" class="remove-inputdbgrant" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_inputdbgrant).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapperdbgrant).append(new_inputdbgrant); 
+				}
+			});
+			$(input_wrapperdbgrant).on('click', '.remove-inputdbgrant', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});	
+		
+		
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_inputschgrant = $('.add-inputschgrant');
+			var input_wrapperschgrant = $('.input-wrapperschgrant');
+			var new_inputschgrant = '<div><small>Privilege :</small><select name="schprivilege[]" id="schprivilege"><option value="MODIFY">MODIFY</option><option value="MONITOR">MONITOR</option><option value="USAGE">USAGE</option><option value="CREATE SCHEMA">CREATE_SCHEMA</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<small>Role :</small><input type="text" name="schrole[]" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;<small>Schema :</small> <input type="text" name="sch[]" value=""/><a href= "javascript;" class="remove-inputschgrant" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_inputschgrant).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapperschgrant).append(new_inputschgrant); 
+				}
+			});
+			$(input_wrapperschgrant).on('click', '.remove-inputschgrant', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});
+		
+		$(document).ready(function(){
+			var max_input_fields = 10;
+			var add_wrapperclustercost = $('.add-wrapperclustercost');
+			var input_wrapperclustercost = $('.input-wrapperclustercost');
+			var new_wrapperclustercost = '<div><small>Warehouse size :</small><select name="warehouse_size[]" id="warehouse_size"><option value="xs">Extra Small</option><option value="s">Small</option><option value="m">Medium</option>				<option value="l">Large</option><option value="xl">Extra Large</option><option value="2xl">Double XL</option><option value="3xl">Triple XL</option><option value="4xl">Four XL</option></select>&nbsp;&nbsp;&nbsp;&nbsp;<small>Mins per day :</small> <input type="text" name="mins[]" value=""/><a href= "javascript;" class="remove-wrapperclustercost" title="Remove input"><img src="/static/png/minus.png"/></a></div>';
+			var add_input_count = 1; 
+			$(add_wrapperclustercost).click(function(){
+				if(add_input_count < max_input_fields){
+					add_input_count++; 
+					$(input_wrapperclustercost).append(new_wrapperclustercost); 
+				}
+			});
+			$(input_wrapperclustercost).on('click', '.remove-wrapperclustercost', function(e){
+				e.preventDefault();
+				$(this).parent('div').remove();
+				add_input_count--;
+			});
+		});	
+		</script>
+    </body>
+</html>

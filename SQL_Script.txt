@@ -1,0 +1,104 @@
+-- creating database and Schema
+CREATE or REPLACE DATABASE UNISTORE_163;
+USE DATABASE UNISTORE_163;
+CREATE or REPLACE SCHEMA HYBRID;
+
+-- Creating hybrid table and standard tables and inserting 1.5M records from the shared orders table.
+CREATE OR REPLACE HYBRID TABLE ORDERS  (
+    O_ORDERKEY INT PRIMARY KEY,
+    O_CUSTKEY  INT,
+    O_ORDERSTATUS VARCHAR(4),
+    O_TOTALPRICE FLOAT(),
+    O_ORDERDATE DATE,
+    O_ORDERPRIORITY VARCHAR(15),
+    O_CLERK VARCHAR(15),
+    O_SHIPPRIORITY INT,
+    O_COMMENT TEXT,
+index part_key (O_CUSTKEY));
+
+INSERT INTO ORDERS (SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.ORDERS);
+
+CREATE OR REPLACE TABLE STD_ORDERS AS (SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.ORDERS);
+
+-- creating orders_key table for the singleton insert usecase
+create or replace table orders_key as
+SELECT a.O_ORDERKEY FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10.ORDERS a left join orders b on
+a.o_orderkey = b.o_orderkey where b.o_orderkey is null;
+
+create or replace procedure insert_into_orders(numberofrecords string)
+  returns string
+  language javascript
+  as
+  $$
+
+    try {
+        var sql_command1 =
+            "select o_orderkey from UNISTORE_163.HYBRID.ORDERS_KEY LIMIT " + NUMBEROFRECORDS ;
+        var resultset1 = snowflake.execute (
+            {sqlText: sql_command1}
+            );
+        while (resultset1.next())
+        {
+            var order_key = resultset1.getColumnValue(1);
+
+            var sql_command =
+                "INSERT INTO log_message (message) VALUES ( '" + order_key + "')" ;
+
+            var sql_insert = "INSERT INTO UNISTORE_163.HYBRID.ORDERS (SELECT * from SNOWFLAKE_SAMPLE_DATA.TPCH_SF10.ORDERS WHERE O_ORDERKEY = " + order_key + ");";
+
+            try{
+                snowflake.execute (
+                    {sqlText: sql_insert}
+                    );
+
+            }
+            catch (err)  {
+                return "Failed1: " + err;   // Return a success/error indicator.
+            }
+        }
+        return "Succeeded.";   // Return a success/error indicator.
+        }
+    catch (err)  {
+        return "Failed: " + err;   // Return a success/error indicator.
+        }
+  $$
+  ;
+
+create or replace procedure insert_into_std_orders(numberofrecords string)
+  returns string
+  language javascript
+  as
+  $$
+
+    try {
+        var sql_command1 =
+            "select o_orderkey from UNISTORE_163.HYBRID.ORDERS_KEY LIMIT " + NUMBEROFRECORDS ;
+        var resultset1 = snowflake.execute (
+            {sqlText: sql_command1}
+            );
+        while (resultset1.next())
+        {
+            var order_key = resultset1.getColumnValue(1);
+
+            var sql_command =
+                "INSERT INTO log_message (message) VALUES ( '" + order_key + "')" ;
+
+            var sql_insert = "INSERT INTO UNISTORE_163.HYBRID.STD_ORDERS (SELECT * from SNOWFLAKE_SAMPLE_DATA.TPCH_SF10.ORDERS WHERE O_ORDERKEY = " + order_key + ");";
+
+            try{
+                snowflake.execute (
+                    {sqlText: sql_insert}
+                    );
+
+            }
+            catch (err)  {
+                return "Failed1: " + err;   // Return a success/error indicator.
+            }
+        }
+        return "Succeeded.";   // Return a success/error indicator.
+        }
+    catch (err)  {
+        return "Failed: " + err;   // Return a success/error indicator.
+        }
+  $$
+  ;

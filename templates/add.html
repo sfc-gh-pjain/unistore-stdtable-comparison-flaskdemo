@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}
+Snowflake Accelerator -- Estimator
+{%  endblock %}
+
+{% block content %}
+    <section>
+        <h1>Snowflake Price Estimation</h1>
+        <form action="" method="post">
+            <article>
+                <p>
+                    <label>Please enter the Cloud Provider of your choise	:  
+							<input list="cloud" name="cloud_list" id="cloud_list" /></label>
+							<datalist id="cloud">
+							  <option value="AWS">
+							  <option value="Azure">
+							  <option value="Google Cloud">
+							</datalist>
+                <br>
+				<br>
+                    
+						<label>Please select the Region to be used	: 
+							<input list="region" name="region_list" id="region_list" /></label>
+							<datalist id="region">
+							  <option value="aws-us-east-na">
+							  <option value="aws-us-east-ohio">
+							  <option value="aws-us-west-oregon">
+							  <option value="aws-canada">
+							  <option value="aws-eu-london">
+							  <option value="aws-eu-ireland">
+							  <option value="aws-eu-frank">
+							  <option value="aws-APAC-sydney">
+							  <option value="aws-APAC-singapore">
+							  <option value="aws-APAC-tokyo">
+							  <option value="aws-APAC-mumbai">
+							  <option value="azure-east-us-2-virginia">
+							  <option value="azure-west-us-2-washington">
+							  <option value="azure-central-toronto">
+							  <option value="azure-west-europe-netherlands">
+							  <option value="azure-australia-east-sydney">
+							  <option value="azure-southeast-asia-singapore">
+							  <option value="azure-switzerland-north-zurich">
+							  <option value="gcp-us-central-1-iowa">
+							  <option value="gcp-europe-west2-london">
+							  <option value="gcp-europe-west4-netherlands">
+							</datalist>
+							
+					<br>
+					<br>
+                    <label>Approx size of the storage in TB per month	: <input type="text" name="size" id="size" /></label>
+					<br>
+					<br>
+					<label>Please select the storage type	: 
+							<input list="storagetype" name="storage_type" id="storage_type" /></label>
+							<datalist id="storagetype">
+							  <option value="on_demand_storage">
+							  <option value="capacitystorage"></datalist>
+					<br>
+					<br>
+					<label>Please select the type of snowflake version	: 
+							<input list="version" name="version_type" id="version_type" /></label>
+							<datalist id="version">
+							  <option value="Enterprise">
+							  <option value="Standard">
+							  <option value="Business_critical"></datalist>
+							  
+					  <br>
+					  <br>
+					<div class="input-wrapperclustercost">
+						<div> <h3>Compute Cluster Cost :</h3> <hr/>
+						<small>Warehouse size :</small> 
+						<select name="warehouse_size[]" id="warehouse_size">
+							<option value="xs">Extra Small</option>
+							<option value="s">Small</option>
+							<option value="m">Medium</option>
+							<option value="l">Large</option>
+							<option value="xl">Extra Large</option>
+							<option value="2xl">Double XL</option>
+							<option value="3xl">Triple XL</option>
+							<option value="4xl">Four XL</option>
+							</select>&nbsp;&nbsp;&nbsp;&nbsp;<small>Mins per day :</small> <input type="text" name="mins[]" value=""/>
+						
+						<a href= "javascript:" class="add-wrapperclustercost" title="Add Cluster"> <img src="/static/png/plus.png"/> </a>
+						</div>
+					</div>
+					  <!-- <label>Please select the warehouse size	:  -->
+							<!-- <input list="warehousesize" name="warehouse_size" id="warehouse_size" /></label> -->
+							<!-- <datalist id="warehousesize"> -->
+							  <!-- <option value="xs"> -->
+							  <!-- <option value="s"> -->
+							  <!-- <option value="m"> -->
+							  <!-- <option value="l"> -->
+							  <!-- <option value="xl"> -->
+							  <!-- <option value="2xl"> -->
+							  <!-- <option value="3xl"> -->
+							  <!-- <option value="4xl"> -->
+							<!-- </datalist> -->
+							  
+					 
+					  <!-- <label>Approx runtime of the warehouse in mins per day	: <input type="text" name="runtime" id="runtime" /></label> -->
+					  <br>
+					  <label>Please select (all the days that may apply) the days when these jobs will be scheduled  : </label>
+					  <br>
+							<!-- <select name="weekdays" id="weekday[]" multiple> -->
+								<!-- <option>Monday</option> -->
+								<!-- <option>Tuesday</option> -->
+								<!-- <option>Wednesday</option> -->
+								<!-- <option>Thursday</option> -->
+								<!-- <option>Friday</option> -->
+								<!-- <option>Saturday</option> -->
+								<!-- <option>Sunday</option> -->
+							<!-- </select> -->
+							Monday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+							Tuesday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+							Wednesday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+							Thursday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+							Friday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+							Saturday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+							Sunday<input type="checkbox" value="1" name="mycheckbox" />&nbsp;&nbsp;&nbsp;
+					  <br>
+					  <br>
+					  <br>
+					<button class='btn btn-default'>Calculate</button>
+                    <!-- <a href="/return-test/" target="blank"><button class='btn btn-default'>Download!</button></a> -->
+                </p>
+            </article>
+        </form>
+    </section>
+{% endblock %}

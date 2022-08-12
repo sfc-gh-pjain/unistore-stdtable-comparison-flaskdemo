@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+<style>
+.input-wrapper div {
+    margin-bottom: 10px;
+}
+.remove-input {
+    margin-top: 10px;
+    margin-left: 15px;
+    vertical-align: text-bottom;
+}
+.add-input {
+    margin-top: 10px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+}
+p.c {
+  font-style: italic;
+}
+</style>
+{% block title %}
+Snowflake Accelerator -- Account Maintanence
+{%  endblock %}
+
+{% block content %}
+
+    <section>
+		<h4>
+			Snowflake role creation script for common usecases to run based on Number of users, their corresponding roles, emails to be associated with them needs to be developed.
+		</h4>
+        <h1>Create resources for Snowflake</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+			<div class="input-wrapper">
+				<div> 
+				<hr> <h2>Databases :</h2> <hr/>
+				<input type="text" name="DB[]" value=""/>
+				<a href= "javascript:" class="add-input" title="Add Input"> <img src="/static/png/plus.png"/> </a>
+				</div>
+			</div>
+			<br>
+			<div class="input-wrapperSch">
+				<div> <h2>Schemas :</h2><hr/>
+				<sub><p>
+                    Please ensure to add the DB to schema name e.g., DEV_DB.DEV_SCHEMA as schema name
+                </p></sub>
+				
+				
+				<input type="text" name="schema[]" value=""/>
+				<a href= "javascript:" class="add-inputschema" title="Add Input Schema"> <img src="/static/png/plus.png"/> </a>
+				</div>
+			</div>
+			<br>
+			<div class="input-wrapperrole">
+				<div> <h2>Roles :</h2> <hr/>
+				<input type="text" name="role[]" value=""/>
+				<a href= "javascript:" class="add-inputrole" title="Add Input Role"> <img src="/static/png/plus.png"/> </a>
+				</div>
+			</div>
+			<br>
+			<div class="input-wrapperaccgrant">
+				<div> <h2>Grants on Accounts :</h2> <hr/>
+				<small>Privilege :</small> 
+				<select name="accprivilege[]" id="accprivilege">
+					<option value="CREATE ROLE">CREATE_ROLE</option>
+					<option value="CREATE USER">CREATE_USER</option>
+					<option value="CREATE WAREHOUSE">CREATE_WAREHOUSE</option>
+					<option value="CREATE DATABASE">CREATE_DATABASE</option>
+					<option value="CREATE INTEGRATION">CREATE_INTEGRATION</option>
+					<option value="APPLY MASKING POLICY">APPLY_MASKING_POLICY</option>
+					<option value="EXECUTE TASK">EXECUTE_TASK</option>
+					</select>
+				&nbsp;&nbsp;&nbsp;&nbsp;<small>Role :</small> <input type="text" name="accrole[]" value=""/>
+				<a href= "javascript:" class="add-inputaccgrant" title="Add Input Role"> <img src="/static/png/plus.png"/> </a>
+				</div>
+			</div>
+			<br>
+			<div class="input-wrapperdbgrant">
+				<div> <h2>Grants on Database :</h2> <hr/>
+				<small>Privilege :</small> 
+				<select name="dbprivilege[]" id="dbprivilege">
+					<option value="MODIFY">MODIFY</option>
+					<option value="MONITOR">MONITOR</option>
+					<option value="USAGE">USAGE</option>
+					<option value="CREATE SCHEMA">CREATE_SCHEMA</option>
+					</select>
+				&nbsp;&nbsp;&nbsp;&nbsp;<small>Role :</small> <input type="text" name="dbrole[]" value=""/>
+				&nbsp;&nbsp;&nbsp;&nbsp;<small>Database :</small> <input type="text" name="db[]" value=""/>
+				<a href= "javascript:" class="add-inputdbgrant" title="Add Input Role"> <img src="/static/png/plus.png"/> </a>
+				</div>
+			</div>
+			<br>
+			<div class="input-wrapperschgrant">
+				<div> <h2>Grants on Schema :</h2> <hr/>
+				<small>Privilege :</small> 
+				<select name="schprivilege[]" id="schprivilege">
+					<option value="MODIFY">MODIFY</option>
+					<option value="MONITOR">MONITOR</option>
+					<option value="USAGE">USAGE</option>
+					<option value="CREATE TABLE">CREATE_TABLE</option>
+					<option value="CREATE VIEW">CREATE_VIEW</option>
+					</select>
+				&nbsp;&nbsp;&nbsp;&nbsp;<small>Role :</small> <input type="text" name="schrole[]" value=""/>
+				&nbsp;&nbsp;&nbsp;&nbsp;<small>Schema :</small> <input type="text" name="sch[]" value=""/>
+				<a href= "javascript:" class="add-inputschgrant" title="Add Input Role"> <img src="/static/png/plus.png"/> </a>
+				</div>
+			</div>
+			<br>
+			<br>	
+			<button class='btn btn-default'>Submit Request</button>
+			<!-- <input type ="submit" name="cmdsubmit"/> -->
+           
+        </form>
+    </section>
+	
+{% endblock %}
