@@ -1,5 +1,14 @@
 # unistore-technicaldemo
-A technical demo on [Unistore](https://www.snowflake.com/workloads/unistore/) with an UI infront for better comparison.
+A technical demo on [Unistore](https://www.snowflake.com/workloads/unistore/) with an Python UI infront for better comparison. 
+
+Below is the image of the UI outcome. (Please do not forget to watch the [video](https://vimeo.com/739044002/eaa6350080 ) to see the outcome which is less than 3 mins)
+
+
+
+![Alt text](static/png/Hybrid_DemoUI.png?raw=true "Sample UI")
+
+
+
 
 The purpose of the demo is to show that Unistore really works!!! Also comparing side by side against standard snowflake tables.
 
