@@ -8,13 +8,15 @@ import snowflake.connector
 import simplejson as json
 import datetime
 import pandas as pd
+import configparser
+config = configparser.ConfigParser()
+config.sections()
+config.read('config.ini')
 
 """
 Parameters
 """
 
-secret_name = "snowflake_lambda"
-region_name = "eu-west-2"
 warehouse_dict = {
     "xs": 1,
     "s": 2,
@@ -186,9 +188,6 @@ app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = '211660'
 toolbar = DebugToolbarExtension(app)
-warehouse_list = []
-for keys in warehouse_dict.keys():
-    warehouse_list.append(keys)
 
 
 def default(o):
@@ -200,9 +199,9 @@ def snow_flake_exec_lambda_handler(event, context):
     print(json.dumps(event))
     # print(get_secret())
     ctx = snowflake.connector.connect(
-        user='UNISTORE_163',
-        password='Nevergivein1',
-        account='demo53')
+        user=config['SNOWFLAKE']['User'],
+        password=config['SNOWFLAKE']['Password'],
+        account=config['SNOWFLAKE']['Account'])
     cs = ctx.cursor()
     one_row = None
     try:
@@ -221,9 +220,9 @@ def snow_flake_exec_lambda_handler(event, context):
 
 def get_list_from_snowflake(year):
     ctx = snowflake.connector.connect(
-        user='UNISTORE_163',
-        password='Nevergivein1',
-        account='demo53')
+        user=config['SNOWFLAKE']['User'],
+        password=config['SNOWFLAKE']['Password'],
+        account=config['SNOWFLAKE']['Account'])
     cur = ctx.cursor()
     monthlist = []
     revenuelist = []
@@ -244,9 +243,9 @@ def get_list_from_snowflake(year):
 
 def get_list_from_snowflake_std(year):
     ctx = snowflake.connector.connect(
-        user='UNISTORE_163',
-        password='Nevergivein1',
-        account='demo53')
+        user=config['SNOWFLAKE']['User'],
+        password=config['SNOWFLAKE']['Password'],
+        account=config['SNOWFLAKE']['Account'])
     cur = ctx.cursor()
     monthlist = []
     revenuelist = []
