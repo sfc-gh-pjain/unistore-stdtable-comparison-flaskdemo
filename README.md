@@ -33,6 +33,7 @@ Just few prerequisites.
         5. snowflake.connector
         6. simplejson
         7. pandas
+        8. configparser
 # Steps to be followed
 Below is the step by step process for executing this demo.
 
